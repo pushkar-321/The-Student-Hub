@@ -1,13 +1,13 @@
 # Student Hub Program, Made by Pushkar and Kartik
 data = {
-    6911: {1: "Pushkar", 2: "11th - A", 3: "39", "M": 40, "P": 40, "C": 40, "E": 40, "CS": 40},
-    2791: {1: "Kartik", 2: "11th - A", 3: "29", "M": 40, "P": 40, "C": 40, "E": 40, "CS": 40}
+    6911: {1: "Pushkar", 2: "11th - A", 3: "39", "M": 40, "P": 40, "C": 40, "E": 40, "CS": 40, 4: 100, 5: "A"},
+    7104: {1: "Kartik", 2: "11th - A", 3: "29", "M": 40, "P": 40, "C": 40, "E": 40, "CS": 40, 4: 100, 5: "A"}
 }
 
 while True:  # running an infinite loop for smoother functioning
 
     user_input = int(input(
-        "Choose from the given actions: View(1), Edit(2), Delete(3), Delete Database(4), search(5), generate report(6) Exit(7): "))
+        "Choose from the given actions: View(1), Edit(2), Delete(3), Delete Database(4), search(5), generate report(6), Add another record(7), View Database(8), Exit(9): "))
 
     if user_input == 1:  # code for View command
         choice = int(input("Enter serial no. to access the info: "))
@@ -17,12 +17,12 @@ while True:  # running an infinite loop for smoother functioning
             continue
         else:
             choice2 = int(input(
-                "Enter what info you want to view: Name(1), Class(2), Roll no(3), Whole record(4): "))
+                "Enter what info you want to view: Name(1), Class(2), Roll no(3), percentage(4), Grade(5), Whole record(6): "))
 
-            if choice2 == 1 or choice2 == 2 or choice2 == 3:
+            if choice2 == 1 or choice2 == 2 or choice2 == 3 or choice2 == 4 or choice2 == 5:
                 print("The info you asked for is this: ",
                       data[choice][choice2])
-            elif choice2 == 4:
+            elif choice2 == 6:
                 print("The whole record is this: ", data[choice])
             else:
                 print("Enter a valid option")
@@ -39,7 +39,7 @@ while True:  # running an infinite loop for smoother functioning
             else:
                 print("Enter a valid input")
                 continue
-        
+
     elif user_input == 2:  # code for edit command
         choice = int(
             input("Enter serial no. to select the info to be changed: "))
@@ -49,25 +49,14 @@ while True:  # running an infinite loop for smoother functioning
             continue
         else:
             choice2 = int(input(
-                "Choose from the options to change: Name(1), Roll no.(3), class(2), Add another record(4): "))
+                "Choose from the options to change: Name(1), Roll no.(3), class(2): "))
 
             if choice2 in [1, 2, 3]:
                 data[choice][choice2] = input("Enter the changed data: ")
                 print("The data you have changed looks like this",
                       data[choice][choice2])
-            elif choice2 == 4:
-                choice3 = int(
-                    input("Enter a serial no./Admission no for the new info: "))
-                name = input("Enter the name of the student: ")
-                grade = input("Enter the class of the student: ")
-                roll_no = input("Enter the roll no. of the student: ")
-                maths_marks = int(input("Enter the marks in Maths: "))
-                physics_marks = int(input("Enter the marks in Physics: "))
-                chemistry_marks = int(input("Enter the marks in Chemistry: "))
-                english_marks = int(input("Enter the marks in English: "))
-                cs_marks = int(input("Enter the marks in Computer Science: "))
-                data[choice3] = {1: name, 2: grade, 3: roll_no, "M": maths_marks, "P": physics_marks, "C": chemistry_marks, "E": english_marks, "CS": cs_marks}
-                print("The info you've added is", data[choice3])
+            else:
+                print("Enter valid input")
 
             choice3 = int(
                 input("Do you want to edit marks too? Yes(1), No(2): "))
@@ -126,16 +115,18 @@ while True:  # running an infinite loop for smoother functioning
         else:
             continue
 
-    elif user_input == 5: # code for search command
-        choice = int(input("Enter the admission number of the student to search: "))
+    elif user_input == 5:  # code for search command
+        choice = int(
+            input("Enter the admission number of the student to search: "))
 
         if choice in data.keys():
             print("The student was found in the database")
-            choice3 = int(input("Do you want to extract that student's info: Yes(1), No(2): "))
+            choice3 = int(
+                input("Do you want to extract that student's info: Yes(1), No(2): "))
 
             if choice3 == 1:
                 choice2 = int(input(
-                "Enter what info you want to view: Name(1), Class(2), Roll no(3), Whole record(4): "))
+                    "Enter what info you want to view: Name(1), Class(2), Roll no(3), Whole record(4): "))
 
                 if choice2 == 1 or choice2 == 2 or choice2 == 3:
                     print("The info you asked for is this: ",
@@ -150,7 +141,8 @@ while True:  # running an infinite loop for smoother functioning
                 if choice3 == 1:
                     choice4 = input(
                         "Enter the subject whose marks you want to see: Math Marks(M), Physics Marks(P), Chemistry Marks(C), English Marks(E), CS Marks(CS) : \n")
-                    print("The info you asked for is this", data[choice][choice4])
+                    print("The info you asked for is this",
+                          data[choice][choice4])
                 elif choice3 == 2:
                     continue
                 else:
@@ -162,8 +154,10 @@ while True:  # running an infinite loop for smoother functioning
             print("The Student was not found in the database")
             continue
 
-    elif user_input == 6: # code for generating report command
-        choice = int(input("Enter the serial no./Admission no. of student to generate report: "))
+    elif user_input == 6:  # code for generating report command
+
+        choice = int(
+            input("Enter the serial no./Admission no. of student to generate report: "))
 
         if choice not in data:
             print("Enter a valid serial no./Admission no.")
@@ -179,7 +173,41 @@ while True:  # running an infinite loop for smoother functioning
             print("Marks in English: ", data[choice]["E"])
             print("Marks in Computer Science: ", data[choice]["CS"])
 
-    elif user_input == 7:  # Code for exit command
+    elif user_input == 7:  # code for adding another record
+        choice3 = int(
+            input("Enter a serial no./Admission no for the new info: "))
+        if choice3 in data:
+            print("The Student is already there in the database")
+        else:
+            name = input("Enter the name of the student: ")
+            grade = input("Enter the class of the student: ")
+            roll_no = input("Enter the roll no. of the student: ")
+            maths_marks = int(input("Enter the marks in Maths: "))
+            physics_marks = int(input("Enter the marks in Physics: "))
+            chemistry_marks = int(input("Enter the marks in Chemistry: "))
+            english_marks = int(input("Enter the marks in English: "))
+            cs_marks = int(input("Enter the marks in Computer Science: "))
+            percentage = (maths_marks + physics_marks + chemistry_marks + english_marks + cs_marks)/5
+            if percentage in range(80, 101):
+                grade = "A"
+            elif percentage in range(60, 80):
+                grade = "B"
+            elif percentage in range(40, 60):
+                grade = "C"
+            elif percentage in range(20, 40):
+                grade = "D"
+            elif percentage in range(0, 20):
+                grade = "E"
+            data[choice3] = {1: name, 2: grade, 3: roll_no, "M": maths_marks, "P": physics_marks,
+                             "C": chemistry_marks, "E": english_marks, "CS": cs_marks, 4: percentage, 5: grade}
+            print("The info you've added is", data[choice3])
+
+    elif user_input == 8:  # code for viewing database command
+        print("Here is the info you asked for:")
+        for i in data:
+            print("The data of student with admin no.", i, "is", data[i])
+
+    elif user_input == 9:  # Code for exit command
         print("Okay then, thank you for entering The Student Hub, will interact with you next time, have a nice day, bye.")
         break
 
